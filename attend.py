@@ -51,7 +51,7 @@ def handle_message(sender_id, message):
     else:
         handle_unknown(sender_id, message)
 
-def handle_attendance(sender_id:
+def handle_attendance(sender_id):
     send.send_quick_reply_location(sender_id)
     return
 
