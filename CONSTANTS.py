@@ -19,6 +19,7 @@ Your attendance has NOT been recorded. Please try again using your \'Current Loc
 UNKNOWN_ATTACHMENT = "You have sent an attachment that {0} does not know how to deal with. Please try again".format(BOT_NAME)
 UNKNOWN_ERROR = "{0} has encountered an unknown error while processing your message. Please try again, or contact a TA".format(BOT_NAME)
 INVALID_ID = "You have attempted to register for an ID that does not exist. Try again."
+COLLECT_UNAUTHORIZED = "You are unauthorized to use this command."
 
 # List of available Commands
 ATTENDANCE = "attendance"

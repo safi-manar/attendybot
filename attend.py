@@ -57,6 +57,8 @@ def handle_message(sender_id, message):
         handle_register_command(sender_id)
     elif message.split(" ")[0] == "register":
         handle_register(sender_id, message)
+    elif message == "collect":
+        handle_collect(sender_id)
     else:
         handle_unknown(sender_id, message)
 
@@ -121,6 +123,13 @@ def handle_report(sender_id, message):
 def handle_unknown(sender_id, message):
     error(sender_id, CONSTANTS.UNKNOWN_COMMAND.format(message))
     return
+
+
+def handle_collect(sender_id, message):
+    if db.is_fbid_auth_to_collect(sender_id):
+        send.send_message(sender_id, "Some collect logic happening...")
+    else:
+        send.send_message(sender_id, CONSTANTS.COLLECT_UNAUTHORIZED)
 
 
 # Send an error message

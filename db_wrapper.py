@@ -30,6 +30,25 @@ def register_user(user_id, fb_id):
     api.update_cell(CONSTANTS.SHEETS_MAP, row_id, col_id, fb_id)
     return
 
+def is_fbid_auth_to_collect(fb_id):
+    user_id = get_uid_of_fbid(fb_id)
+
+    authorized_uids_str = os.environ['collect_ids'].split(",")
+    authorized_uids = [int(uid) for uid in authorized_uids_str]
+
+    return user_id in authorized_uids
+
+
+def get_uid_of_fbid(fb_id):
+    sheet = api.get_db_gsheet(CONSTANTS.SHEETS_MAP)
+    records = sheet.get_all_records()
+
+    for record in records:
+        if record['fid'] == fb_id:
+            return record['id']
+
+
+
 
 
 # A Wrapper class for interacting with the database
