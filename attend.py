@@ -1,5 +1,6 @@
 import send_wrapper as send
 import CONSTANTS
+import os
 
 
 # Process the data message
@@ -48,8 +49,15 @@ def handle_message(sender_id, message):
         handle_attendance(sender_id)
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
+    elif message == "register":
+        handle_register(sender_id, message)
     else:
         handle_unknown(sender_id, message)
+
+def handle_register(sender_id):
+    os.environ['register'] = sender_id
+    send.send_message(sender_id, "Attempting to log your id...")
+    return
 
 def handle_attendance(sender_id):
     send.send_quick_reply_location(sender_id)
