@@ -58,7 +58,7 @@ def handle_message(sender_id, message):
     elif message.split(" ")[0] == "register":
         handle_register(sender_id, message)
     elif message == "collect":
-        handle_collect(sender_id)
+        handle_collect(sender_id, message)
     else:
         handle_unknown(sender_id, message)
 
