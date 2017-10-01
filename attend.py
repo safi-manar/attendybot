@@ -45,14 +45,14 @@ def handle_message(sender_id, message):
     if message == CONSTANTS.HELP:
         handle_help(sender_id, message)
     elif message == CONSTANTS.ATTENDANCE:
-        handle_attendance(sender_id, CONSTANTS.ATTENDANCE_CONFIRMED)
+        handle_attendance(sender_id)
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
     else:
         handle_unknown(sender_id, message)
 
-def handle_attendance(sender_id, message):
-    send.send_quick_reply_location(sender_id, message)
+def handle_attendance(sender_id:
+    send.send_quick_reply_location(sender_id)
     return
 
 

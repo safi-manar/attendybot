@@ -4,6 +4,8 @@
 # General Strings
 BOT_NAME = "AttendyBot"
 UNKNOWN_COMMAND = "Unknown command \"{0}\". \n For a list of available commands, type \"help\""
+ATTENDANCE_REQUESTED = "Please send your current location to confirm your attendance today!"
+ATTENDANCE_CONFIRMED = "Your attendance has been marked! (fake message)"
 
 
 # Error messages
@@ -19,9 +21,7 @@ REPORT = "report"
 HELP = "help"
 
 
-# Messages that Attendy Bot can send to the user
-
-ATTENDANCE_CONFIRMED = "Your attendance has been marked! (fake message)"
+# Special messages that AttendyBot can send to the user
 
 HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
 {0} - Mark your attendance \n

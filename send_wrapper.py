@@ -3,6 +3,8 @@ import os
 import json
 import app
 
+import CONSTANTS
+
 
 def send_message(recipient_id, message_text):
 
@@ -27,9 +29,9 @@ def send_message(recipient_id, message_text):
         app.log(r.status_code)
         app.log(r.text)
 
-def send_quick_reply_location(recipient_id, message_text):
+def send_quick_reply_location(recipient_id):
 
-    app.log("requesting location from {recipient}: {text}".format(recipient=recipient_id, text=message_text))
+    app.log("requesting location from {recipient}".format(recipient=recipient_id))
 
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
@@ -42,7 +44,7 @@ def send_quick_reply_location(recipient_id, message_text):
             "id": recipient_id
         },
         "message": {
-            "text": "A quick reply example", #message_text
+            "text": CONSTANTS.ATTENDANCE_REQUESTED, #message_text
             "quick_replies": [
                 {
                     "content_type" : "location"
