@@ -20,12 +20,12 @@ def handle_attachment(sender_id, attachment_list):
 
     if isLocation and attachment.get("title") and attachment["title"] == "Pinned Location":
         # User sent a pinned location instead of current location
-        send.send_message(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
+        error(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
     elif isLocation:
         send.send_message(sender_id, "You have attempted to share your current location.")
         handle_location_attendance(sender_id, attachment)
     else:
-        send.send_message(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
+        error(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
     return
 
 def handle_location_attendance(sender_id, attachment):
@@ -37,19 +37,23 @@ def handle_location_attendance(sender_id, attachment):
         response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
         send.send_message(sender_id, response)
     except:
-        print "Hello."
+        error(sender_id, CONSTANTS.UNKNOWN_ERROR)
 
 
 def handle_message(sender_id, message):
     if message == CONSTANTS.HELP:
         handle_help(sender_id, message)
     elif message == CONSTANTS.ATTENDANCE:
-        message_temp = CONSTANTS.ATTENDANCE_CONFIRMED
-        send.send_message(sender_id, message_temp)
+        handle_attendance(sender_id, CONSTANTS.ATTENDANCE_CONFIRMED)
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
     else:
         handle_unknown(sender_id, message)
+
+def handle_attendance(sender_id, message):
+    send.send_quick_reply_location(sender_id, message)
+    return
+
 
 def handle_help(sender_id, message):
     send.send_message(sender_id, CONSTANTS.HELP_MESSAGE)
@@ -60,6 +64,13 @@ def handle_report(sender_id, message):
     return
 
 def handle_unknown(sender_id, message):
-    response = CONSTANTS.UNKNOWN_COMMAND.format(message)
-    send.send_message(sender_id, response)
+    error(sender_id, CONSTANTS.format(message))
+    return
+
+
+# Send an error message
+def error(sender_id, ERROR, message=""):
+    if message:
+        ERROR = ERROR.format(message)
+    send.send_message(sender_id, ERROR)
     return

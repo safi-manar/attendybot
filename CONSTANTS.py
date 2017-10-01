@@ -11,6 +11,7 @@ PINNED_LOCATION_ERROR = """You have attempted to share your location as a \'Pinn
 your true location. \n
 Your attendance has NOT been recorded. Please try again using your \'Current Location\'."""
 UNKNOWN_ATTACHMENT = "You have sent an attachment that {0} does not know how to deal with. Please try again".format(BOT_NAME)
+UNKNOWN_ERROR = "{0} has encountered an unknown error while processing your message. Please try again, or contact a TA".format(BOT_NAME)
 
 # List of available Commands
 ATTENDANCE = "attendance"
