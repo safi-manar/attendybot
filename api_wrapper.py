@@ -38,9 +38,9 @@ def get_db_dataframe():
     return df
 
 # Returns the gsheet instance of the database
-def get_db_gsheet():
+def get_db_gsheet(spreadsheet_name):
     client = _get_gspread_client()
-    spreadsheet = client.open(CONSTANTS.SPREADSHEET_NAME)
+    spreadsheet = client.open(spreadsheet_name)
     gsheet = spreadsheet.sheet1
     return gsheet
 
@@ -56,8 +56,8 @@ def flush_dataframe_to_db(df):
 
 ########### GSpread API ##################
 
-def update_cell(row, col, val):
-    gsheet = get_db_gsheet()
+def update_cell(spreadsheet_name, row, col, val):
+    gsheet = get_db_gsheet(spreadsheet_name)
     gsheet.update_cell(row, col, val)
     return
 

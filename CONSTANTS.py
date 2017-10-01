@@ -38,4 +38,5 @@ HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
 
 
 # DB_wrapper Database Strings
-SPREADSHEET_NAME = "attendy_data"
+SHEETS_ATTENDANCE = "attendy_data"
+SHEETS_MAP = "mapping"

@@ -1,6 +1,7 @@
 import json
 import os
 import api_wrapper as api
+import CONSTANTS
 
 # user_id = the user's index id, from 0 - num_of_students, that the user registered with.
 # fb_id = facebook id, aka the 'sender_id'
@@ -26,7 +27,7 @@ def _get_col_id(column):
 def register_user(user_id, fb_id):
     row_id = _get_row_id(user_id)
     col_id = _get_col_id("fid")
-    api.update_cell(row_id, col_id, fb_id)
+    api.update_cell(CONSTANTS.SHEETS_MAP, row_id, col_id, fb_id)
     return
 
 
