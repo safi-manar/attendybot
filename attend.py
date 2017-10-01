@@ -41,6 +41,7 @@ def handle_location_attendance(sender_id, attachment):
 
 
 def handle_message(sender_id, message):
+    message = message.lower() # Force all messages to lowercase for easier parsing
     if message == CONSTANTS.HELP:
         handle_help(sender_id, message)
     elif message == CONSTANTS.ATTENDANCE:
