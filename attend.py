@@ -62,8 +62,8 @@ def handle_register(sender_id):
     first = users['First'].tolist()
     last = users['Last'].tolist()
     message = ""
-    for i in range(0, len(f)):
-        message = message + "{0} {1} {2}\n".format(i, first[i], last[i])
+    for id in range(0, len(first)):
+        message = message + "{0} {1} {2}\n".format(id, first[id], last[id])
 
     # Construct a string:
 
