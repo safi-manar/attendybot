@@ -27,7 +27,7 @@ REGISTER = "register"
 HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
 {attendance} - Mark your attendance \n
 {report} - Show a report of your attendance for the semester \n
-{register} - Register yourself in the class attendance system
+{register} - Register yourself in the class attendance system\n
 {help} - Show the help menu \n
 """.format(attendance=ATTENDANCE, report=REPORT, register=REGISTER, help=HELP)
 

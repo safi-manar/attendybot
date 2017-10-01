@@ -3,6 +3,7 @@ import CONSTANTS
 import os
 import pandas as pd
 from io import StringIO
+import app
 
 
 # Process the data message
@@ -61,7 +62,10 @@ def handle_register(sender_id):
     users = pd.read_csv(StringIO(users_string), index_col=0)
     first = users['First'].tolist()
     last = users['Last'].tolist()
-    message = ""
+    message = "test_concat"
+    app.log(message)
+    app.log("Length of first: " + str(len(first)))
+    app.log(str(first))
     for id in range(0, len(first)):
         message = message + "{0} {1} {2}\n".format(id, first[id], last[id])
 
