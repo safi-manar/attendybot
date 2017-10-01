@@ -61,7 +61,7 @@ def handle_message(sender_id, message):
         send_message(sender_id, message_temp)
     else:
         send_message(sender_id, "Unknown command! Here is an echo of your message:")
-        send_message(sender_id, message_text)
+        send_message(sender_id, message)
 
 
 def send_message(recipient_id, message_text):
