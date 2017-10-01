@@ -4,6 +4,7 @@ import pandas as pd
 import io
 import os
 import CONSTANTS
+import time
 
 # Constructs a dictionary readable by oath2client ServiceAccountCredentials with key data from environment vars
 def _get_keyfile_dict():
@@ -60,4 +61,16 @@ def update_cell(spreadsheet_name, row, col, val):
     gsheet = get_db_gsheet(spreadsheet_name)
     gsheet.update_cell(row, col, val)
     return
+
+def new_collect(duration):
+    gsheet = get_db_gsheet(CONSTANTS.SHEETS_COLLECTIONS)
+    current_time = time.time()
+    records = gsheet.get_all_records()
+    num_sessions = len(records)
+    next_session = num_sessions + 1
+    row_id = next_session + 1 # Because of the header
+    start_col_id = 2
+    update_cell(gsheet, row_id, start_col_id, current_time)
+    return
+
 

@@ -37,7 +37,10 @@ HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
 {help} - Show the help menu \n
 """.format(attendance=ATTENDANCE, report=REPORT, register=REGISTER, help=HELP)
 
+NEW_COLLECT = "You've started a new attendance collection session. This session will expire in {duration} minutes!"
+
 
 # DB_wrapper Database Strings
 SHEETS_ATTENDANCE = "attendy_data"
 SHEETS_MAP = "mapping"
+SHEETS_COLLECTIONS = "collections"

@@ -3,9 +3,10 @@ import os
 import api_wrapper as api
 import CONSTANTS
 import app
-
-# user_id = the user's index id, from 0 - num_of_students, that the user registered with.
-# fb_id = facebook id, aka the 'sender_id'
+# A Wrapper class for interacting with the database
+# Some Labels:
+#   user_id = the user's index id, from 0 - num_of_students, that the user registered with.
+#   fb_id = facebook id, aka the 'sender_id'
 
 
 # Currently, the row_id is offset by +2 of the user_id.
@@ -37,8 +38,6 @@ def is_fbid_auth_to_collect(fb_id):
     authorized_uids_str = os.environ['collect_ids'].split(",")
     authorized_uids = [int(uid) for uid in authorized_uids_str]
 
-    app.log("Authorized_ids: " + str(authorized_uids))
-    app.log("Your id: " + str(user_id))
 
     return user_id in authorized_uids
 
@@ -47,15 +46,13 @@ def get_uid_of_fbid(fb_id):
     fb_id = int(fb_id)
     sheet = api.get_db_gsheet(CONSTANTS.SHEETS_MAP)
     records = sheet.get_all_records()
-    app.log("Your fbid: " + str(fb_id) + str(type(fb_id)))
     for record in records:
-        app.log(record['fid'])
-        app.log(type(record['fid']))
         if record['fid'] == fb_id:
             return record['id']
 
 
 
+def new_collect(duration=2):
+    api.new_collect(duration)
+    return duration
 
-
-# A Wrapper class for interacting with the database
