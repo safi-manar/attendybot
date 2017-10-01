@@ -64,7 +64,7 @@ def handle_report(sender_id, message):
     return
 
 def handle_unknown(sender_id, message):
-    error(sender_id, CONSTANTS.format(message))
+    error(sender_id, CONSTANTS.UNKNOWN_COMMAND.format(message))
     return
 
 
