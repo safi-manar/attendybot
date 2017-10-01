@@ -1,8 +1,7 @@
 import os
 import sys
-import json
 
-import requests
+
 from flask import Flask, request
 
 # Import other Python files
