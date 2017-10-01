@@ -85,24 +85,24 @@ def handle_register_command(sender_id):
 
 def handle_register(sender_id, message):
     id_str = message.split(" ")[1]
-    try:
-        id = int(id_str)
-        users_string = unicode(os.environ['user_map'])
-        users = pd.read_csv(StringIO(users_string), delimiter=",", index_col=0)
+    #try:
+    id = int(id_str)
+    users_string = unicode(os.environ['user_map'])
+    users = pd.read_csv(StringIO(users_string), delimiter=",", index_col=0)
 
-        if id > (len(users) - 1):
-            send.send_message(sender_id, CONSTANTS.INVALID_ID)
-            return
+    if id > (len(users) - 1):
+        send.send_message(sender_id, CONSTANTS.INVALID_ID)
+        return
 
-        first_name = users.iloc[id]['First']
-        last_name = users.iloc[id]['Last']
+    first_name = users.iloc[id]['First']
+    last_name = users.iloc[id]['Last']
 
-        db.register_user(id, sender_id)
+    db.register_user(id, sender_id)
 
-        message = "You have attempted to register as {0} {1}".format(first_name, last_name)
-        send.send_message(sender_id, message)
-    except:
-        send.send_message(sender_id, CONSTANTS.UNKNOWN_ERROR)
+    message = "You have attempted to register as {0} {1}".format(first_name, last_name)
+    send.send_message(sender_id, message)
+    #except:
+    #    send.send_message(sender_id, CONSTANTS.UNKNOWN_ERROR)
 
 
 def handle_attendance(sender_id):
