@@ -39,7 +39,8 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "Hello there!")
+                    # Handle the message.
+                    handle_message(send_id, message_text)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -51,6 +52,16 @@ def webhook():
                     pass
 
     return "ok", 200
+
+
+
+def handle_message(sender_id, message):
+    if message == "Attendance":
+        message_temp = "Your attendance has been marked! (fake message)"
+        send_message(sender_id, message_temp)
+    else:
+        send_message(sender_id, "Unknown command! Here is an echo of your message:")
+        send_message(sender_id, message_text)
 
 
 def send_message(recipient_id, message_text):
