@@ -59,7 +59,7 @@ def handle_message(sender_id, message):
 
 def handle_register(sender_id):
     users_string = unicode(os.environ['user_map'])
-    users = pd.read_csv(StringIO(users_string), index_col=0)
+    users = pd.read_csv(StringIO(users_string), delimiter=",", index_col=0)
     first = users['First'].tolist()
     last = users['Last'].tolist()
     message = "test_concat"
