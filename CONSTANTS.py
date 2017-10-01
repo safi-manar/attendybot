@@ -2,7 +2,7 @@
 # A list of constants string constants
 
 # General Strings
-UNKNOWN_COMMAND = "Unknown command \"{0}\". For a list of available commands, type \"help\""
+UNKNOWN_COMMAND = "Unknown command \"{0}\". \n For a list of available commands, type \"help\""
 
 # List of available Commands
 ATTENDANCE = "attendance"
