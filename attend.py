@@ -15,7 +15,15 @@ def process_message_event(messaging_event):
         handle_attachment(sender_id, attachment)
 
 def handle_attachment(sender_id, attachment):
-    send.send_message(sender_id, "You have attempted to share an attachment.")
+    isLocation = attachment.get("type") and attachment["type"] == "location"
+
+    if isLocation and attachment.get("title") and attachment["title"] == "Pinned Location":
+        # User sent a pinned location instead of current location
+        send.send_message(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
+    elif isLocation:
+        send.send_message(sender_id, "You have attempted to share your current location.")
+    else:
+        send.send_message(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
     return
 
 def handle_message(sender_id, message):
