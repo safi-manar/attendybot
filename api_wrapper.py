@@ -53,3 +53,11 @@ def flush_dataframe_to_db(df):
     client.import_csv(id, df.to_csv())
     return 0
 
+
+########### GSpread API ##################
+
+def update_cell(row, col, val):
+    gsheet = get_db_gsheet()
+    gsheet.update_cell(row, col, val)
+    return
+

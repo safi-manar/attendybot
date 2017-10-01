@@ -3,7 +3,8 @@ import CONSTANTS
 import os
 import pandas as pd
 from io import StringIO
-import app
+import db_wrapper as db
+
 
 
 # Process the data message
@@ -95,6 +96,8 @@ def handle_register(sender_id, message):
 
         first_name = users.iloc[id]['First']
         last_name = users.iloc[id]['Last']
+
+        db.register_user(id, sender_id)
 
         message = "You have attempted to register as {0} {1}".format(first_name, last_name)
         send.send_message(sender_id, message)
