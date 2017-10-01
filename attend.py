@@ -53,21 +53,18 @@ def handle_message(sender_id, message):
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
     elif message == "register":
-        handle_register(sender_id)
+        handle_register_command(sender_id)
+    elif message.split(" ")[0] == "register":
+        handle_register(sender_id, message)
     else:
         handle_unknown(sender_id, message)
 
-def handle_register(sender_id):
+def handle_register_command(sender_id):
     users_string = unicode(os.environ['user_map'])
     users = pd.read_csv(StringIO(users_string), delimiter=",", index_col=0)
     first = users['First'].tolist()
     last = users['Last'].tolist()
-    message = "test_concat"
-    app.log(message)
-    app.log("Length of first: " + str(len(first)))
-    app.log(str(first))
-    app.log("Dataframe:")
-    app.log(str(users))
+    message = ""
     messages = []
     for id in range(0, len(first)):
         next_row = "{0} {1} {2}\n".format(id, first[id], last[id])
@@ -79,12 +76,31 @@ def handle_register(sender_id):
             message = message + next_row
     messages.append(message) # Append last message block
 
-
     # Construct a string:
     for message in messages:
         send.send_message(sender_id, message)
     send.send_message(sender_id, CONSTANTS.REGISTER_INFO)
     return
+
+def handle_register(sender_id, message):
+    id_str = message.split(" ")[1]
+    try:
+        id = int(id_str)
+        users_string = unicode(os.environ['user_map'])
+        users = pd.read_csv(StringIO(users_string), delimiter=",", index_col=0)
+
+        if id > (len(users) - 1):
+            send.send_message(sender_id, CONSTANTS.INVALID_ID)
+            return
+
+        first_name = users.iloc[id]['First']
+        last_name = users.iloc[id]['Last']
+
+        message = "You have attempted to register as {0} {1}".format(first_name, last_name)
+        send.send_message(sender_id, message)
+    except:
+        send.send_message(sender_id, CONSTANTS.UNKNOWN_ERROR)
+
 
 def handle_attendance(sender_id):
     send.send_quick_reply_location(sender_id)
