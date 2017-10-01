@@ -66,6 +66,8 @@ def handle_register(sender_id):
     app.log(message)
     app.log("Length of first: " + str(len(first)))
     app.log(str(first))
+    app.log("Dataframe:")
+    app.log(str(users))
     for id in range(0, len(first)):
         message = message + "{0} {1} {2}\n".format(id, first[id], last[id])
 
