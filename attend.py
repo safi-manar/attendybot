@@ -1,6 +1,8 @@
 import send_wrapper as send
 import CONSTANTS
 import os
+import pandas as pd
+from io import StringIO
 
 
 # Process the data message
@@ -55,8 +57,18 @@ def handle_message(sender_id, message):
         handle_unknown(sender_id, message)
 
 def handle_register(sender_id):
-    os.environ['register'] = sender_id
-    send.send_message(sender_id, "Attempting to log your id...")
+    users_string = os.environ['user_map']
+    users = pd.read_csv(StringIO(users_string), index_col=0)
+    first = users['First'].tolist()
+    last = users['Last'].tolist()
+    message = ""
+    for i in range(0, len(f)):
+        message = message + "{0} {1} {2}\n".format(i, first[i], last[i])
+
+    # Construct a string:
+
+    send.send_message(sender_id, message)
+    send.send_message(sender_id, CONSTANTS.REGISTER_INFO)
     return
 
 def handle_attendance(sender_id):
