@@ -45,7 +45,7 @@ def send_quick_reply_location(recipient_id, message_text):
             "text": "A quick reply example", #message_text
             "quick_replies": [
                 {
-                    "content type" : "location"
+                    "content_type" : "location"
                 },
             ]
         }
