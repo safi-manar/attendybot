@@ -128,6 +128,7 @@ def handle_unknown(sender_id, message):
 def handle_collect(sender_id, message):
     if db.is_fbid_auth_to_collect(sender_id):
         send.send_message(sender_id, "Some collect logic happening...")
+        #db.new_collect()
     else:
         send.send_message(sender_id, CONSTANTS.COLLECT_UNAUTHORIZED)
 

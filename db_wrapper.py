@@ -2,6 +2,7 @@ import json
 import os
 import api_wrapper as api
 import CONSTANTS
+import app
 
 # user_id = the user's index id, from 0 - num_of_students, that the user registered with.
 # fb_id = facebook id, aka the 'sender_id'
@@ -35,6 +36,9 @@ def is_fbid_auth_to_collect(fb_id):
 
     authorized_uids_str = os.environ['collect_ids'].split(",")
     authorized_uids = [int(uid) for uid in authorized_uids_str]
+
+    app.log("Authorized_ids: " + str(authorized_uids))
+    app.log("Your id: " + str(user_id))
 
     return user_id in authorized_uids
 
