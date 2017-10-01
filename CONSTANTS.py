@@ -28,3 +28,7 @@ HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
 {1} - Show a report of your attendance for the semester \n
 {2} - Show the help menu \n
 """.format(ATTENDANCE, REPORT, HELP)
+
+
+# DB_wrapper Database Strings
+SPREADSHEET_NAME = "attendy_data"
