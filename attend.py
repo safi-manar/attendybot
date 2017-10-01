@@ -68,12 +68,21 @@ def handle_register(sender_id):
     app.log(str(first))
     app.log("Dataframe:")
     app.log(str(users))
+    messages = []
     for id in range(0, len(first)):
-        message = message + "{0} {1} {2}\n".format(id, first[id], last[id])
+        next_row = "{0} {1} {2}\n".format(id, first[id], last[id])
+        if len(message) + len(next_row) < CONSTANTS.MESSAGE_LIMIT:
+            message = message + next_row
+        else:
+            messages.append(message)
+            message = ""
+            message = message + next_row
+    messages.append(message) # Append last message block
+
 
     # Construct a string:
-
-    send.send_message(sender_id, message)
+    for message in messages:
+        send.send_message(sender_id, message)
     send.send_message(sender_id, CONSTANTS.REGISTER_INFO)
     return
 

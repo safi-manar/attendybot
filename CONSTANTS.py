@@ -1,5 +1,8 @@
 
-# A list of constants string constants
+# A list of constants and strings
+
+# Constants
+MESSAGE_LIMIT = 600
 
 # General Strings
 BOT_NAME = "AttendyBot"
@@ -7,6 +10,7 @@ UNKNOWN_COMMAND = "Unknown command \"{0}\". \n For a list of available commands,
 ATTENDANCE_REQUESTED = "Please send your current location to confirm your attendance today!"
 ATTENDANCE_CONFIRMED = "Your attendance has been marked! (fake message)"
 REGISTER_INFO = "Please type in register <#> for the number which corresponds to your name above.\n You MUST type this number in correctly to receive attendance credit this semester!"
+
 
 # Error messages
 PINNED_LOCATION_ERROR = """You have attempted to share your location as a \'Pinned Location\' instead of
