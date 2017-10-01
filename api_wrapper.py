@@ -63,7 +63,7 @@ def update_cell(spreadsheet_name, row, col, val):
     return
 
 def new_collect(duration):
-    gsheet = get_db_gsheet(CONSTANTS.SHEETS_COLLECTIONS)
+    gsheet = get_db_gsheet("collections")
     current_time = time.time()
     records = gsheet.get_all_records()
     num_sessions = len(records)
