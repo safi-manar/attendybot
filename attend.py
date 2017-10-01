@@ -50,7 +50,7 @@ def handle_message(sender_id, message):
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
     elif message == "register":
-        handle_register(sender_id, message)
+        handle_register(sender_id)
     else:
         handle_unknown(sender_id, message)
 
