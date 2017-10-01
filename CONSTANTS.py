@@ -19,15 +19,17 @@ UNKNOWN_ERROR = "{0} has encountered an unknown error while processing your mess
 ATTENDANCE = "attendance"
 REPORT = "report"
 HELP = "help"
+REGISTER = "register"
 
 
 # Special messages that AttendyBot can send to the user
 
 HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
-{0} - Mark your attendance \n
-{1} - Show a report of your attendance for the semester \n
-{2} - Show the help menu \n
-""".format(ATTENDANCE, REPORT, HELP)
+{attendance} - Mark your attendance \n
+{report} - Show a report of your attendance for the semester \n
+{register} - Register yourself in the class attendance system
+{help} - Show the help menu \n
+""".format(attendance=ATTENDANCE, report=REPORT, register=REGISTER, help=HELP)
 
 
 # DB_wrapper Database Strings

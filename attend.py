@@ -57,7 +57,7 @@ def handle_message(sender_id, message):
         handle_unknown(sender_id, message)
 
 def handle_register(sender_id):
-    users_string = os.environ['user_map']
+    users_string = unicode(os.environ['user_map'])
     users = pd.read_csv(StringIO(users_string), index_col=0)
     first = users['First'].tolist()
     last = users['Last'].tolist()
