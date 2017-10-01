@@ -11,10 +11,11 @@ def process_message_event(messaging_event):
         # Handle the message.
         handle_message(sender_id, message_text)
     elif messaging_event["message"].get("attachments"):
-        attachment = messaging_event["message"]["attachments"]
-        handle_attachment(sender_id, attachment)
+        attachment_list = messaging_event["message"]["attachments"]
+        handle_attachment(sender_id, attachment_list)
 
-def handle_attachment(sender_id, attachment):
+def handle_attachment(sender_id, attachment_list):
+    attachment = attachment_list[0]
     isLocation = attachment.get("type") and attachment["type"] == "location"
 
     if isLocation and attachment.get("title") and attachment["title"] == "Pinned Location":
