@@ -44,6 +44,7 @@ def is_fbid_auth_to_collect(fb_id):
 
 
 def get_uid_of_fbid(fb_id):
+    fb_id = int(fb_id)
     sheet = api.get_db_gsheet(CONSTANTS.SHEETS_MAP)
     records = sheet.get_all_records()
     app.log("Your fbid: " + str(fb_id) + str(type(fb_id)))
