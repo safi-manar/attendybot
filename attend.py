@@ -10,7 +10,7 @@ def handle_message(sender_id, message):
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
     else:
-        send.send_message(sender_id, "Unknown command! Here is an echo of your message:")
+        send.send_message(sender_id, CONSTANTS.UNKNOWN_COMMAND.format(message))
         send.send_message(sender_id, message)
 
 def handle_help(sender_id, message):
