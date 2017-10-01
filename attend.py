@@ -23,9 +23,22 @@ def handle_attachment(sender_id, attachment_list):
         send.send_message(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
     elif isLocation:
         send.send_message(sender_id, "You have attempted to share your current location.")
+        handle_location_attendance(sender_id, attachment)
     else:
         send.send_message(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
     return
+
+def handle_location_attendance(sender_id, attachment):
+    try:
+        payload = attachment["payload"]
+        coordinates = payload["coordinates"]
+        lat = coordinates["lat"]
+        long = coordinates["long"]
+        response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
+        send.send_message(sender_id, response)
+    except:
+        print "Hello."
+
 
 def handle_message(sender_id, message):
     if message == CONSTANTS.HELP:
