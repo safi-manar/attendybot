@@ -148,6 +148,9 @@ def handle_attendance(sender_id):
     if not db.is_fbid_registered(sender_id):
         error(sender_id, CONSTANTS.NOT_REGISTERED)
         return
+    if not db.is_session_active():
+        error(sender_id, CONSTANTS.SESSION_INACTIVE)
+        return
     send.send_quick_reply_location(sender_id)
     return
 
