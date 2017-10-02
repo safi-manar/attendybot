@@ -42,6 +42,7 @@ def handle_location_attendance(sender_id, attachment):
         coordinates = payload["coordinates"]
         lat = coordinates["lat"]
         long = coordinates["long"]
+        db.record_attendance(sender_id, lat, long)
         response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
         send.send_message(sender_id, response)
     except:
