@@ -10,8 +10,8 @@ BOT_NAME = "AttendyBot"
 UNKNOWN_COMMAND = "Unknown command \"{0}\". \n For a list of available commands, type \"help\""
 ATTENDANCE_REQUESTED = "Please send your current location to confirm your attendance today!"
 ATTENDANCE_CONFIRMED = "Your attendance has been marked! (fake message)"
-REGISTER_INFO = "Please type in register <#> for the number which corresponds to your name above.\n You MUST type this number in correctly to receive attendance credit this semester!"
-
+REGISTER_INFO = "Please type in \"register #\" for the number which corresponds to your name above.\n You MUST type this number in correctly to receive attendance credit this semester!"
+REGISTER_SUCCESS = "You have successfully registered as {first} {last}!"
 
 # Error messages
 PINNED_LOCATION_ERROR = """You have attempted to share your location as a \'Pinned Location\' instead of
@@ -22,6 +22,8 @@ UNKNOWN_ERROR = "{0} has encountered an unknown error while processing your mess
 INVALID_ID = "You have attempted to register for an ID that does not exist. Try again."
 COLLECT_UNAUTHORIZED = "You are unauthorized to use this command."
 SESSION_INACTIVE = "Attendance is not being taken right now. If you were late, please contact a TA."
+LOCATION_OUT_OF_RANGE = """You have attempted to record your attendance, but it seems like you are out of range of the classroom! \n
+If you believe this is a mistake, contact a TA."""
 
 # List of available Commands
 ATTENDANCE = "attendance"

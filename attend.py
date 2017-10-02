@@ -42,11 +42,28 @@ def handle_location_attendance(sender_id, attachment):
     coordinates = payload["coordinates"]
     lat = coordinates["lat"]
     long = coordinates["long"]
-    db.record_attendance(sender_id, lat, long)
-    response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
-    send.send_message(sender_id, response)
+    if check_bounds(lat, long):
+        db.record_attendance(sender_id, lat, long)
+        response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
+        send.send_message(sender_id, response)
+    else:
+        error(sender_id, CONSTANTS.LOCATION_OUT_OF_RANGE)
     #except: //TODO Bring back
         #error(sender_id, CONSTANTS.UNKNOWN_ERROR)
+
+
+def check_bounds(lat, long):
+    lat = float(lat)
+    long = float(long)
+    ullat = float(os.environ['ullat'])
+    ullong = float(os.environ['ullong'])
+    lrlat = float(os.environ['lrlat'])
+    lrlong = float(os.environ['lrlong'])
+
+    bounded_lat = lat < ullat and lat < lrlat
+    bounded_long = long < ullong and long < lrlong
+    return bounded_lat and bounded_long
+
 
 
 def handle_message(sender_id, message):
@@ -105,7 +122,7 @@ def handle_register(sender_id, message):
 
     db.register_user(id, sender_id)
 
-    message = "You have attempted to register as {0} {1}".format(first_name, last_name)
+    message = CONSTANTS.REGISTER_SUCCESS.format(first=first_name, last=last_name)
     send.send_message(sender_id, message)
     #except:
     #    send.send_message(sender_id, CONSTANTS.UNKNOWN_ERROR)
