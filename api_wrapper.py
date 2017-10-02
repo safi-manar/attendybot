@@ -7,6 +7,7 @@ import CONSTANTS
 import time
 from datetime import datetime, timedelta
 import pytz
+from dateutil import parser
 
 # Constructs a dictionary readable by oath2client ServiceAccountCredentials with key data from environment vars
 def _get_keyfile_dict():
@@ -89,4 +90,5 @@ def get_most_recent_collect():
     records = gsheet.get_all_records()
     last_record = records[len(records) - 1]
     session, start, end = last_record['session'], last_record['start'], last_record['end']
+    start, end = parser.parse(start), parser.parse(end)
     return session, start, end
