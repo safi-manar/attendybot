@@ -43,8 +43,7 @@ def handle_location_attendance(sender_id, attachment):
     long = coordinates["long"]
     if check_bounds(lat, long):
         db.record_attendance(sender_id, lat, long)
-        response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
-        send.send_message(sender_id, response)
+        send.send_message(sender_id, CONSTANTS.ATTENDANCE_SUCCESS)
     else:
         error(sender_id, CONSTANTS.LOCATION_OUT_OF_RANGE)
     #except: //TODO Bring back
