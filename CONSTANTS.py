@@ -53,6 +53,7 @@ TA_PANEL = """Hello TA! Here is a list of TA commands you can use: \n
 """.format(collect=COLLECT, publish=PUBLISH, ta=TA)
 
 NEW_COLLECT = "You've started a new attendance collection session. This session will expire in {duration} minutes!"
+PUBLISH_SUCCESSFUL = 'The data has been successfully published to the CSV file!'
 
 
 # DB_wrapper Database Strings

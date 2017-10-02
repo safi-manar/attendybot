@@ -170,6 +170,7 @@ def handle_collect(sender_id, message):
 def handle_ta_publish(sender_id):
     if db.is_fbid_TA(sender_id):
         db.publish_report()
+        send.send_message(sender_id, CONSTANTS.PUBLISH_SUCCESSFUL)
     else:
         error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
     return
