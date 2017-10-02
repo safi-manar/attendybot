@@ -107,10 +107,6 @@ def record_attendance(fb_id, lat, long):
 
 
     session_id, start, end = api.get_most_recent_collect()
-    # If the column name for this session has not been written yet, do so now
-    offset = CONSTANTS.ATTENDANCE_SESSIONS_COLUMN_OFFSET
-    if len(user_attendance) < int(session_id) + offset:
-        api.update_cell(CONSTANTS.SHEETS_ATTENDANCE, 1, offset+int(session_id), session_id)
 
 
     row_id = _get_attendance_row_id(user_id)

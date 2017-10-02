@@ -85,6 +85,14 @@ def new_collect(duration):
     update_cell(CONSTANTS.SHEETS_COLLECTIONS, row_id, session_col_id, next_session)
     update_cell(CONSTANTS.SHEETS_COLLECTIONS, row_id, start_col_id, current_time)
     update_cell(CONSTANTS.SHEETS_COLLECTIONS, row_id, end_col_id, end_time)
+
+
+    # next_session is now the latest session. Update the attendy_data appropriately.
+    # If the column name for this session has not been written yet, do so now
+    session_id = next_session
+    offset = CONSTANTS.ATTENDANCE_SESSIONS_COLUMN_OFFSET
+    update_cell(CONSTANTS.SHEETS_ATTENDANCE, 1, offset+int(session_id), session_id)
+
     return
 
 
