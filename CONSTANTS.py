@@ -20,7 +20,7 @@ Your attendance has NOT been recorded. Please try again using your \'Current Loc
 UNKNOWN_ATTACHMENT = "You have sent an attachment that {0} does not know how to deal with. Please try again".format(BOT_NAME)
 UNKNOWN_ERROR = "{0} has encountered an unknown error while processing your message. Please try again, or contact a TA".format(BOT_NAME)
 INVALID_ID = "You have attempted to register for an ID that does not exist. Try again."
-COLLECT_UNAUTHORIZED = "You are unauthorized to use this command."
+COMMAND_UNAUTHORIZED = "You are unauthorized to use this command."
 SESSION_INACTIVE = "Attendance is not being taken right now. If you were late, please contact a TA."
 LOCATION_OUT_OF_RANGE = """You have attempted to record your attendance, but it seems like you are out of range of the classroom! \n
 If you believe this is a mistake, contact a TA."""
@@ -30,16 +30,27 @@ ATTENDANCE = "attendance"
 REPORT = "report"
 HELP = "help"
 REGISTER = "register"
+# TA Command Panel
+COLLECT = "collect"
+PUBLISH = "publish"
+TA = "ta"
+
 
 
 # Special messages that AttendyBot can send to the user
 
-HELP_MESSAGE = """Confused? Here are a list of commands you can use: \n
+HELP_MESSAGE = """Confused? Here is a list of commands you can use: \n
 {attendance} - Mark your attendance \n
 {report} - Show a report of your attendance for the semester \n
 {register} - Register yourself in the class attendance system\n
 {help} - Show the help menu \n
 """.format(attendance=ATTENDANCE, report=REPORT, register=REGISTER, help=HELP)
+
+TA_PANEL = """Hello TA! Here is a list of TA commands you can use: \n
+{collect} - Begin an attendance collection session \n
+{publish} - Show a report of your attendance for the semester \n
+{ta} - Show the TA help menu \n
+""".format(collect=COLLECT, publish=PUBLISH, ta=TA)
 
 NEW_COLLECT = "You've started a new attendance collection session. This session will expire in {duration} minutes!"
 

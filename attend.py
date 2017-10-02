@@ -28,7 +28,6 @@ def handle_attachment(sender_id, attachment_list):
             # User sent a pinned location instead of current location
             error(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
         elif isLocation:
-            send.send_message(sender_id, "You have attempted to share your current location.")
             handle_location_attendance(sender_id, attachment)
         else:
             error(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
@@ -74,12 +73,14 @@ def handle_message(sender_id, message):
         handle_attendance(sender_id)
     elif message == CONSTANTS.REPORT:
         handle_report(sender_id, message)
-    elif message == "register":
+    elif message == CONSTANTS.REGISTER:
         handle_register_command(sender_id)
-    elif message.split(" ")[0] == "register":
+    elif message.split(" ")[0] == CONSTANTS.REGISTER:
         handle_register(sender_id, message)
-    elif message == "collect":
+    elif message == CONSTANTS.HELP:
         handle_collect(sender_id, message)
+    elif message == CONSTANTS.TA:
+        handle_ta_help(sender_id)
     else:
         handle_unknown(sender_id, message)
 
@@ -137,6 +138,14 @@ def handle_help(sender_id, message):
     send.send_message(sender_id, CONSTANTS.HELP_MESSAGE)
     return
 
+def handle_ta_help(sender_id):
+    if db.is_fbid_TA(sender_id):
+        send.send_message(sender_id, CONSTANTS.TA_PANEL)
+    else:
+        error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
+
+    return
+
 def handle_report(sender_id, message):
     send.send_message(sender_id, "PLACEHOLDER MESSAGE") #TODO
     return
@@ -147,12 +156,12 @@ def handle_unknown(sender_id, message):
 
 
 def handle_collect(sender_id, message):
-    if db.is_fbid_auth_to_collect(sender_id):
+    if db.is_fbid_TA(sender_id):
         duration = 2
         db.new_collect(duration)
         send.send_message(sender_id, CONSTANTS.NEW_COLLECT.format(duration=str(duration)))
     else:
-        send.send_message(sender_id, CONSTANTS.COLLECT_UNAUTHORIZED)
+        error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
 
 
 # Send an error message
