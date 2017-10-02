@@ -93,6 +93,7 @@ def handle_message(sender_id, message):
 def handle_register_command(sender_id):
     if os.environ['register_enabled'] != "True":
         error(sender_id, CONSTANTS.REGISTER_DISABLED)
+        return
 
 
     users_string = unicode(os.environ['user_map'])
