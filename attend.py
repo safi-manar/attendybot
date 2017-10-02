@@ -20,6 +20,11 @@ def process_message_event(messaging_event):
         handle_attachment(sender_id, attachment_list)
 
 def handle_attachment(sender_id, attachment_list):
+    if not db.is_fbid_registered(sender_id):
+        error(sender_id, CONSTANTS.NOT_REGISTERED)
+        return
+
+
     if db.is_session_active():
         attachment = attachment_list[0]
         isLocation = attachment.get("type") and attachment["type"] == "location"
@@ -86,6 +91,10 @@ def handle_message(sender_id, message):
         handle_unknown(sender_id, message)
 
 def handle_register_command(sender_id):
+    if os.environ['register_enabled'] != "True":
+        error(sender_id, CONSTANTS.REGISTER_DISABLED)
+
+
     users_string = unicode(os.environ['user_map'])
     users = pd.read_csv(StringIO(users_string), delimiter=",", index_col=0)
     first = users['First'].tolist()
@@ -131,6 +140,9 @@ def handle_register(sender_id, message):
 
 
 def handle_attendance(sender_id):
+    if not db.is_fbid_registered(sender_id):
+        error(sender_id, CONSTANTS.NOT_REGISTERED)
+        return
     send.send_quick_reply_location(sender_id)
     return
 

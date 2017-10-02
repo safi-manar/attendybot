@@ -24,6 +24,9 @@ COMMAND_UNAUTHORIZED = "You are unauthorized to use this command."
 SESSION_INACTIVE = "Attendance is not being taken right now. If you were late, please contact a TA."
 LOCATION_OUT_OF_RANGE = """You have attempted to record your attendance, but it seems like you are out of range of the classroom! \n
 If you believe this is a mistake, contact a TA."""
+NOT_REGISTERED = "You have not registered for the class! Please type \'register\' to register."
+REGISTER_DISABLED = "Registration is currently disabled!"
+
 
 # List of available Commands
 ATTENDANCE = "attendance"

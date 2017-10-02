@@ -69,6 +69,9 @@ def get_uid_of_fbid(fb_id):
         if record['fb_id'] == fb_id:
             return record['id']
 
+def is_fbid_registered(fb_id):
+    u_id = get_uid_of_fbid(fb_id)
+    return u_id is not None
 
 
 def new_collect(duration=2):
