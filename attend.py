@@ -59,8 +59,8 @@ def check_bounds(lat, long):
     lrlat = float(os.environ['lrlat'])
     lrlong = float(os.environ['lrlong'])
 
-    bounded_lat = lat < ullat and lat < lrlat
-    bounded_long = long < ullong and long < lrlong
+    bounded_lat = lat < ullat and lat > lrlat
+    bounded_long = long < ullong and long > lrlong
     return bounded_lat and bounded_long
 
 
