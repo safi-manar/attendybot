@@ -38,7 +38,7 @@ def _get_attendance_col_id(column, session_id=None):
     elif column == "fb_id":
         return 4
     elif column == "session":
-        return 5 + int(session_id)
+        return 4 + int(session_id)
 
 
 
