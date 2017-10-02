@@ -15,7 +15,7 @@ def publish(db):
     report = construct_report_df(db, session_to_days, days_to_session)
 
     # Map the Team names onto the Dataframe
-    mapping = db.get_sheet_dataframe(CONSTANTS.SHEETS_MAP)
+    mapping = api.get_sheet_dataframe(CONSTANTS.SHEETS_MAP)
     merged = pd.merge(mapping, report, on='id')
     del merged['First'] # Delete leftover columns
     del merged['Last']
