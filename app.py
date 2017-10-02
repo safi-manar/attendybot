@@ -1,9 +1,11 @@
 import os
 import sys
-import json
 
-import requests
+
 from flask import Flask, request
+
+# Import other Python files
+import attend
 
 app = Flask(__name__)
 
@@ -34,12 +36,7 @@ def webhook():
             for messaging_event in entry["messaging"]:
 
                 if messaging_event.get("message"):  # someone sent us a message
-
-                    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-                    message_text = messaging_event["message"]["text"]  # the message's text
-
-                    send_message(sender_id, "roger that!")
+                    attend.process_message_event(messaging_event)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -53,28 +50,9 @@ def webhook():
     return "ok", 200
 
 
-def send_message(recipient_id, message_text):
 
-    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
 
-    params = {
-        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
-    }
-    headers = {
-        "Content-Type": "application/json"
-    }
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            "text": message_text
-        }
-    })
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-    if r.status_code != 200:
-        log(r.status_code)
-        log(r.text)
+
 
 
 def log(message):  # simple wrapper for logging to stdout on heroku
