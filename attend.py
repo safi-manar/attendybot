@@ -37,16 +37,16 @@ def handle_attachment(sender_id, attachment_list):
     return
 
 def handle_location_attendance(sender_id, attachment):
-    try:
-        payload = attachment["payload"]
-        coordinates = payload["coordinates"]
-        lat = coordinates["lat"]
-        long = coordinates["long"]
-        db.record_attendance(sender_id, lat, long)
-        response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
-        send.send_message(sender_id, response)
-    except:
-        error(sender_id, CONSTANTS.UNKNOWN_ERROR)
+    #try:
+    payload = attachment["payload"]
+    coordinates = payload["coordinates"]
+    lat = coordinates["lat"]
+    long = coordinates["long"]
+    db.record_attendance(sender_id, lat, long)
+    response = "Your reported location is lat: {0} , long: {1}".format(lat, long)
+    send.send_message(sender_id, response)
+    #except: //TODO Bring back
+        #error(sender_id, CONSTANTS.UNKNOWN_ERROR)
 
 
 def handle_message(sender_id, message):
