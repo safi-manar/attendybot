@@ -30,19 +30,19 @@ def _get_gspread_client():
     return client
 
 # Return a python pandas dataframe representation of a sheet
-def get_sheet_dataframe(sheet_name):
+def get_sheet_dataframe(sheet_name, index_col=None):
     client = _get_gspread_client()
     spreadsheet = client.open(sheet_name)
     sheet = spreadsheet.sheet1
 
     sheet_bytes = sheet.export() # Export as bytes
     sheets_io = io.BytesIO(sheet_bytes) # As IOStream, readable by pandas
-    df = pd.read_csv(sheets_io)
+    df = pd.read_csv(sheets_io, index_col=index_col)
     return df
 
 # Returns a python pandas dataframe representation of the current database
-def get_db_dataframe():
-    return get_sheet_dataframe(CONSTANTS.SHEETS_ATTENDANCE)
+def get_db_dataframe(index_col=None):
+    return get_sheet_dataframe(CONSTANTS.SHEETS_ATTENDANCE, index_col)
 
 # Returns the gsheet instance of the database
 def get_db_gsheet(spreadsheet_name):

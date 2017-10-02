@@ -122,7 +122,7 @@ def record_attendance(fb_id, lat, long):
 
 
 def publish_report():
-    db = api.get_db_dataframe()
+    db = api.get_db_dataframe(index_col='id')
     report = publisher.publish(db)
     api.flush_dataframe_to_db(report, CONSTANTS.SHEETS_REPORT)
 
