@@ -3,6 +3,7 @@ import os
 import api_wrapper as api
 import CONSTANTS
 import app
+from datetime import datetime
 # A Wrapper class for interacting with the database
 # Some Labels:
 #   user_id = the user's index id, from 0 - num_of_students, that the user registered with.
@@ -55,4 +56,12 @@ def get_uid_of_fbid(fb_id):
 def new_collect(duration=2):
     api.new_collect(duration)
     return duration
+
+
+def is_session_active():
+    session, start, end = api.get_most_recent_collect()
+    current_time = datetime.now()
+    return current_time < end
+
+
 

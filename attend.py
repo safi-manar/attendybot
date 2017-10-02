@@ -20,17 +20,20 @@ def process_message_event(messaging_event):
         handle_attachment(sender_id, attachment_list)
 
 def handle_attachment(sender_id, attachment_list):
-    attachment = attachment_list[0]
-    isLocation = attachment.get("type") and attachment["type"] == "location"
+    if db.is_session_active():
+        attachment = attachment_list[0]
+        isLocation = attachment.get("type") and attachment["type"] == "location"
 
-    if isLocation and attachment.get("title") and attachment["title"] == "Pinned Location":
-        # User sent a pinned location instead of current location
-        error(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
-    elif isLocation:
-        send.send_message(sender_id, "You have attempted to share your current location.")
-        handle_location_attendance(sender_id, attachment)
+        if isLocation and attachment.get("title") and attachment["title"] == "Pinned Location":
+            # User sent a pinned location instead of current location
+            error(sender_id, CONSTANTS.PINNED_LOCATION_ERROR)
+        elif isLocation:
+            send.send_message(sender_id, "You have attempted to share your current location.")
+            handle_location_attendance(sender_id, attachment)
+        else:
+            error(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
     else:
-        error(sender_id, CONSTANTS.UNKNOWN_ATTACHMENT)
+        error(sender_id, CONSTANTS.SESSION_INACTIVE)
     return
 
 def handle_location_attendance(sender_id, attachment):

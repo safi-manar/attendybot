@@ -84,3 +84,9 @@ def new_collect(duration):
     return
 
 
+def get_most_recent_collect():
+    gsheet = get_db_gsheet(CONSTANTS.SHEETS_COLLECTIONS)
+    records = gsheet.get_all_records()
+    last_record = records[len(records) - 1]
+    session, start, end = last_record['session'], last_record['start'], last_record['end']
+    return session, start, end
