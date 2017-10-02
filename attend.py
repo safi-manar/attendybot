@@ -119,6 +119,10 @@ def handle_register_command(sender_id):
     return
 
 def handle_register(sender_id, message):
+    if os.environ['register_enabled'] != "True":
+        error(sender_id, CONSTANTS.REGISTER_DISABLED)
+        return
+
     id_str = message.split(" ")[1]
     #try:
     id = int(id_str)
