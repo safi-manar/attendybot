@@ -73,8 +73,8 @@ def new_collect(duration):
     next_session = num_sessions + 1
     row_id = next_session + 1 # Because of the header
     start_col_id = 2
-    end_col_id = 1
-    session_col_id = 0
+    end_col_id = 3
+    session_col_id = 1
     # Update the session id, then start, then end time
     update_cell(CONSTANTS.SHEETS_COLLECTIONS, row_id, session_col_id, next_session)
     update_cell(CONSTANTS.SHEETS_COLLECTIONS, row_id, start_col_id, current_time)
