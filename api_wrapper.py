@@ -6,6 +6,7 @@ import os
 import CONSTANTS
 import time
 from datetime import datetime, timedelta
+import pytz
 
 # Constructs a dictionary readable by oath2client ServiceAccountCredentials with key data from environment vars
 def _get_keyfile_dict():
@@ -64,6 +65,7 @@ def update_cell(spreadsheet_name, row, col, val):
     return
 
 def new_collect(duration):
+    tz = pytz.timezone("US/Pacific")
     current_time = datetime.now()
     end_time = current_time + timedelta(minutes = duration)
 
