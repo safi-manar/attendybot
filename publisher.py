@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil import parser
 import api_wrapper as api
 import CONSTANTS
+import app
 
 
 # Given a dataframe representation of the attendy_data.csv database, this script will
@@ -18,6 +19,7 @@ def publish(db):
 # Given a datetime as a string, return the fixed class time date representation
 def fix_class_time(start):
     date = parser.parse(start)
+    app.log("Trying to parse: " + str(start))
     fixed = datetime(date.year, date.month, date.day, 14, 0, 0) # Class starts at 2PM
     return fixed
 
