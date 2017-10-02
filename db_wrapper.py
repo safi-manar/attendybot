@@ -4,6 +4,8 @@ import api_wrapper as api
 import CONSTANTS
 import app
 from datetime import datetime
+import publisher
+
 # A Wrapper class for interacting with the database
 # Some Labels:
 #   user_id = the user's index id, from 0 - num_of_students, that the user registered with.
@@ -115,6 +117,14 @@ def record_attendance(fb_id, lat, long):
     col_id = _get_attendance_col_id("session", session_id)
     api.update_cell(CONSTANTS.SHEETS_ATTENDANCE, row_id, col_id, record_json)
 
+
+    return
+
+
+def publish_report():
+    db = api.get_db_dataframe()
+    report = publisher.publish(db)
+    api.flush_dataframe_to_db(report, CONSTANTS.SHEETS_REPORT)
 
     return
 

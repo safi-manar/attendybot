@@ -48,7 +48,7 @@ HELP_MESSAGE = """Confused? Here is a list of commands you can use: \n
 
 TA_PANEL = """Hello TA! Here is a list of TA commands you can use: \n
 {collect} - Begin an attendance collection session \n
-{publish} - Show a report of your attendance for the semester \n
+{publish} - Publish the latest attendance data to the Google Drive spreadsheet \'report\' \n
 {ta} - Show the TA help menu \n
 """.format(collect=COLLECT, publish=PUBLISH, ta=TA)
 
@@ -59,3 +59,4 @@ NEW_COLLECT = "You've started a new attendance collection session. This session 
 SHEETS_ATTENDANCE = "attendy_data"
 SHEETS_MAP = "mapping"
 SHEETS_COLLECTIONS = "collections"
+SHEETS_REPORT = "report"

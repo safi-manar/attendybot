@@ -81,6 +81,8 @@ def handle_message(sender_id, message):
         handle_collect(sender_id, message)
     elif message == CONSTANTS.TA:
         handle_ta_help(sender_id)
+    elif message == CONSTANTS.PUBLISH:
+        handle_ta_publish(sender_id)
     else:
         handle_unknown(sender_id, message)
 
@@ -138,13 +140,6 @@ def handle_help(sender_id, message):
     send.send_message(sender_id, CONSTANTS.HELP_MESSAGE)
     return
 
-def handle_ta_help(sender_id):
-    if db.is_fbid_TA(sender_id):
-        send.send_message(sender_id, CONSTANTS.TA_PANEL)
-    else:
-        error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
-
-    return
 
 def handle_report(sender_id, message):
     send.send_message(sender_id, "PLACEHOLDER MESSAGE") #TODO
@@ -154,6 +149,15 @@ def handle_unknown(sender_id, message):
     error(sender_id, CONSTANTS.UNKNOWN_COMMAND.format(message))
     return
 
+#### TA Commands ####
+
+def handle_ta_help(sender_id):
+    if db.is_fbid_TA(sender_id):
+        send.send_message(sender_id, CONSTANTS.TA_PANEL)
+    else:
+        error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
+
+    return
 
 def handle_collect(sender_id, message):
     if db.is_fbid_TA(sender_id):
@@ -163,8 +167,15 @@ def handle_collect(sender_id, message):
     else:
         error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
 
+def handle_ta_publish(sender_id):
+    if db.is_fbid_TA(sender_id):
+        db.publish_report()
+    else:
+        error(sender_id, CONSTANTS.COMMAND_UNAUTHORIZED)
+    return
 
-# Send an error message
+
+### Wrapper to send an error message
 def error(sender_id, ERROR, message=""):
     if message:
         ERROR = ERROR.format(message)

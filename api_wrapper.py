@@ -29,17 +29,20 @@ def _get_gspread_client():
     client = gspread.authorize(creds)
     return client
 
-
-# Returns a python pandas dataframe representation of the current database
-def get_db_dataframe():
+# Return a python pandas dataframe representation of a sheet
+def get_sheet_dataframe(sheet_name):
     client = _get_gspread_client()
-    spreadsheet = client.open(CONSTANTS.SPREADSHEET_NAME)
+    spreadsheet = client.open(sheet_name)
     sheet = spreadsheet.sheet1
 
     sheet_bytes = sheet.export() # Export as bytes
     sheets_io = io.BytesIO(sheet_bytes) # As IOStream, readable by pandas
     df = pd.read_csv(sheets_io)
     return df
+
+# Returns a python pandas dataframe representation of the current database
+def get_db_dataframe():
+    return get_sheet_dataframe(CONSTANTS.SHEETS_ATTENDANCE)
 
 # Returns the gsheet instance of the database
 def get_db_gsheet(spreadsheet_name):
@@ -49,16 +52,16 @@ def get_db_gsheet(spreadsheet_name):
     return gsheet
 
 # Flush a pandas dataframe to the drive spreadsheet for persistence
-def flush_dataframe_to_db(df):
+def flush_dataframe_to_db(df, sheet_name):
     client = _get_gspread_client()
-    spreadsheet = client.open(CONSTANTS.SPREADSHEET_NAME)
+    spreadsheet = client.open(sheet_name)
     id = spreadsheet.id
 
     client.import_csv(id, df.to_csv())
     return 0
 
 
-########### GSpread API ##################
+########### GSpread API Calls ##################
 
 def update_cell(spreadsheet_name, row, col, val):
     gsheet = get_db_gsheet(spreadsheet_name)
