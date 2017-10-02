@@ -77,7 +77,7 @@ def handle_message(sender_id, message):
         handle_register_command(sender_id)
     elif message.split(" ")[0] == CONSTANTS.REGISTER:
         handle_register(sender_id, message)
-    elif message == CONSTANTS.HELP:
+    elif message == CONSTANTS.COLLECT:
         handle_collect(sender_id, message)
     elif message == CONSTANTS.TA:
         handle_ta_help(sender_id)
