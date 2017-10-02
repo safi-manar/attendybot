@@ -5,7 +5,7 @@ import io
 import os
 import CONSTANTS
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Constructs a dictionary readable by oath2client ServiceAccountCredentials with key data from environment vars
 def _get_keyfile_dict():
@@ -65,7 +65,7 @@ def update_cell(spreadsheet_name, row, col, val):
 
 def new_collect(duration):
     current_time = datetime.now()
-    end_time = current_time + datetime.timedelta(minutes = duration)
+    end_time = current_time + timedelta(minutes = duration)
 
     gsheet = get_db_gsheet(CONSTANTS.SHEETS_COLLECTIONS)
     records = gsheet.get_all_records()
