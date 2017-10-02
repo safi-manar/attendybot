@@ -3,6 +3,7 @@
 
 # Constants
 MESSAGE_LIMIT = 600
+ATTENDANCE_SESSIONS_COLUMN_OFFSET = 4
 
 # General Strings
 BOT_NAME = "AttendyBot"

@@ -38,7 +38,7 @@ def _get_attendance_col_id(column, session_id=None):
     elif column == "fb_id":
         return 4
     elif column == "session":
-        return 4 + int(session_id)
+        return int(session_id) + CONSTANTS.ATTENDANCE_SESSIONS_COLUMN_OFFSET
 
 
 
@@ -80,6 +80,8 @@ def is_session_active():
     return current_time < end
 
 
+
+
 def record_attendance(fb_id, lat, long):
 
     user_id = get_uid_of_fbid(fb_id)
@@ -101,10 +103,18 @@ def record_attendance(fb_id, lat, long):
     record['timestamp'] = str(current_time)
     record_json = json.dumps(record, sort_keys=True)
 
-    row_id = _get_attendance_row_id(user_id)
+
     session_id, start, end = api.get_most_recent_collect()
+    # If the column name for this session has not been written yet, do so now
+    offset = CONSTANTS.ATTENDANCE_SESSIONS_COLUMN_OFFSET
+    if len(user_attendance) < int(session_id) + offset:
+        api.update_cell(CONSTANTS.SHEETS_ATTENDANCE, 0, offset+int(session_id), session_id)
+
+
+    row_id = _get_attendance_row_id(user_id)
     col_id = _get_attendance_col_id("session", session_id)
     api.update_cell(CONSTANTS.SHEETS_ATTENDANCE, row_id, col_id, record_json)
+
 
     return
 
