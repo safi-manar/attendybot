@@ -63,14 +63,14 @@ def update_cell(spreadsheet_name, row, col, val):
     return
 
 def new_collect(duration):
-    gsheet = get_db_gsheet("collections")
+    gsheet = get_db_gsheet(CONSTANTS.SHEETS_COLLECTIONS)
     current_time = time.time()
     records = gsheet.get_all_records()
     num_sessions = len(records)
     next_session = num_sessions + 1
     row_id = next_session + 1 # Because of the header
     start_col_id = 2
-    update_cell(gsheet, row_id, start_col_id, current_time)
+    update_cell(CONSTANTS.SHEETS_COLLECTIONS, row_id, start_col_id, current_time)
     return
 
 
