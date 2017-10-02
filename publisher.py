@@ -18,8 +18,8 @@ def publish(db):
 
 # Given a datetime as a string, return the fixed class time date representation
 def fix_class_time(start):
-    date = parser.parse(start)
     app.log("Trying to parse: " + str(start))
+    date = parser.parse(start)
     fixed = datetime(date.year, date.month, date.day, 14, 0, 0) # Class starts at 2PM
     return fixed
 
